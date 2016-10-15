@@ -24,7 +24,7 @@ void merge_sort(int *, int);
 void join(int *, int *, int *, int, int);
 
 int main(int argc, char **argv) {
-    int size = 10;
+    int size = 20;
 
     int *unsorted = random_unsorted_array(size, 0, 100);
     for (int i = 0; i < size; ++i) {
@@ -60,10 +60,6 @@ void merge_sort(int *array, int count) {
 
 }
 
-void sort(int *array, int count) {
-
-}
-
 void join(int *dest, int *srca, int *srcb, int acount, int bcount) {
     int acc(0), bcc(0);
     int *daux = new int[acount + bcount];
@@ -73,8 +69,6 @@ void join(int *dest, int *srca, int *srcb, int acount, int bcount) {
             acc += (int)mina;
             bcc += (int)!mina;
         } else if (acc >= acount) {
-//            daux[i] = srcb[bcc];
-//            ++bcc;
             int count = bcount - bcc;
             memcpy(daux + i, srcb + bcc, sizeof(int) * (count));
             break;
