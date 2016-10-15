@@ -37,6 +37,7 @@ int main(int argc, char **argv) {
         printf("%d ", unsorted[i]);
     } printf("\n");
 
+    delete[] unsorted;
     return 0;
 }
 
@@ -80,6 +81,7 @@ void join(int *dest, int *srca, int *srcb, int acount, int bcount) {
     }
 
     memcpy(dest, daux, (acount + bcount) * sizeof(int));
+    delete[] daux;
 }
 
 int *random_unsorted_array(int count, int min, int max) {
