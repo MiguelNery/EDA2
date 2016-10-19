@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <random>
+#include <stdio.h>
 
 using namespace std;
 
@@ -30,6 +31,7 @@ int main(int argc, char **argv) {
     for (int i = 0; i < size; ++i) {
         printf("%d ", unsorted[i]);
     } printf("\n");
+    printf("\n");
 
     merge_sort(unsorted, size);
 
@@ -42,13 +44,25 @@ int main(int argc, char **argv) {
 }
 
 void merge_sort(int *array, int count) {
-
     //split in 2
     int *a = array;
     int acount = count/2;
 
     int *b = array + acount;
     int bcount = count - acount;
+
+    printf("\nspliting array: \n");
+    for(int i = 0; i < count; i++) printf("[%d] ", array[i]);
+    printf("\ninto:\n");
+
+    printf("left half: ");
+    for(int i = 0; i < acount; i++) printf("[%d] ", array[i]);
+    printf("\n");
+
+    printf("right half: ");
+    for(int i = acount; i < count; i++) printf("[%d] ", array[i]);
+    printf("\n");
+
     //sort left
     if (acount > 1) {
         merge_sort(a, acount);
@@ -62,18 +76,30 @@ void merge_sort(int *array, int count) {
 }
 
 void join(int *dest, int *srca, int *srcb, int acount, int bcount) {
+    printf("\nleft half: ");
+    for(int i = 0; i < acount; i++) printf("[%d] ", srca[i]);
+    printf("\n");
+
+    printf("right half: ");
+    for(int i = 0; i < bcount; i++) printf("[%d] ", srcb[i]);
+    printf("\n");
+
     int acc(0), bcc(0);
     int *daux = new int[acount + bcount];
+
     for (int i = 0; i < acount + bcount; ++i) {
         if (acc < acount && bcc < bcount) {
+            printf("comparing (left)%d & %d(right)... %d chosen!\n", srca[acc], srcb[bcc], MIN(srca[acc], srcb[bcc]));
             daux[i] = MIN(srca[acc], srcb[bcc]);
             acc += (int)mina;
             bcc += (int)!mina;
         } else if (acc >= acount) {
+            printf("<><>left side empty. dumping right side...\n");
             int count = bcount - bcc;
             memcpy(daux + i, srcb + bcc, sizeof(int) * (count));
             break;
         } else if (bcc >= bcount) {
+            printf("<><>right side empty. dumping left side...\n");
             int count = acount - acc;
             memcpy(daux + i, srca + acc, sizeof(int) * (count));
             break;
