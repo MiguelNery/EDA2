@@ -28,13 +28,14 @@ int main(int argc, char **argv) {
     int size = 20;
 
     int *unsorted = random_unsorted_array(size, 0, 100);
+    printf("unsorted: ");
     for (int i = 0; i < size; ++i) {
         printf("%d ", unsorted[i]);
     } printf("\n");
-    printf("\n");
 
     merge_sort(unsorted, size);
 
+    printf("\nsorted: ");
     for (int i = 0; i < size; ++i) {
         printf("%d ", unsorted[i]);
     } printf("\n");
@@ -76,7 +77,8 @@ void merge_sort(int *array, int count) {
 }
 
 void join(int *dest, int *srca, int *srcb, int acount, int bcount) {
-    printf("\nleft half: ");
+    printf("\nMerging...\n");
+    printf("left half: ");
     for(int i = 0; i < acount; i++) printf("[%d] ", srca[i]);
     printf("\n");
 
@@ -105,6 +107,9 @@ void join(int *dest, int *srca, int *srcb, int acount, int bcount) {
             break;
         }
     }
+    printf("merged: ");
+    for(int i = 0; i < acount + bcount; i++) printf("[%d] ", daux[i]);
+    printf("\n");
 
     memcpy(dest, daux, (acount + bcount) * sizeof(int));
     delete[] daux;

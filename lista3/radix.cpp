@@ -1,4 +1,12 @@
-/* PRECISA SER COMPILADO COM A FLAG -std=c++11 */
+/*INSTRUÇÕES
+Funciona com inteiros num intervalo de "menor inteiro na sua máquina" até 1000000
+NÃO funciona com negativos
+PARA COMPILAR: g++ radix.cpp -std=c++11
+PARA EXECUTAR: ./a.out < radix_input.txt
+dentro de radix_input.txt:
+    o primeiro número, N (inteiro), representa a quantidade de elementos desordenados
+    os próximos N inteiros são os elementos desordenados
+*/
 
 #include <iostream>
 #include <stdio.h>
@@ -7,6 +15,7 @@
 #include <algorithm>
 
 #define COUNTING_SIZE 10
+#define COEFFICIENT 1000000
 
 using ui = unsigned int;
 using cousint = const unsigned int;
@@ -29,9 +38,7 @@ int main() {
     for(ui i = 0; i < unsorted.size(); i++) printf("[%d] ", unsorted[i]);
     printf("\n");
 
-    ui coefficient = 0;
-    scanf("%u", &coefficient);
-    std::vector<int> sorted = radixSort(unsorted, coefficient);
+    std::vector<int> sorted = radixSort(unsorted, COEFFICIENT);
 
     printf("sorted = ");
     for(ui i = 0; i < unsorted.size(); i++) printf("[%d] ", sorted[i]);
