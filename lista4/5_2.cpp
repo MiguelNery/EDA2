@@ -27,7 +27,7 @@ int join(int *, int *, int *, int, int);
 int main(int argc, char **argv) {
     int size = 6;
 
-    int unsorted[] = {3, 64, 10, 86, 77, 18} /* random_unsorted_array(size, 0, 100) */;
+    int unsorted[] = random_unsorted_array(size, 0, 100);
     printf("unsorted: ");
     for (int i = 0; i < size; ++i) {
         printf("%d ", unsorted[i]);
@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 
     printf("%d significant inversions\n", inv);
 
-    // delete[] unsorted;
+    delete[] unsorted;
     return 0;
 }
 
