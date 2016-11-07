@@ -27,7 +27,7 @@ int join(int *, int *, int *, int, int);
 int main(int argc, char **argv) {
     int size = 6;
 
-    int unsorted[] = random_unsorted_array(size, 0, 100);
+    int *unsorted = random_unsorted_array(size, 0, 100);
     printf("unsorted: ");
     for (int i = 0; i < size; ++i) {
         printf("%d ", unsorted[i]);
