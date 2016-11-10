@@ -1,15 +1,16 @@
 #include <array>
 #include <iostream>
 #include <vector>
-
-#define VALUES_SIZE 8
+#include <stdio.h>
 
 using namespace std;
 using cousint = const unsigned int;
+const unsigned int VALUES_SIZE = 8;
 
 
 // vector<vector <cousint> makeAdjList(int*);
 unsigned int maxValue(cousint, array<unsigned int, VALUES_SIZE>);
+unsigned int maxValue(array<unsigned int, VALUES_SIZE>);
 
 template<typename T>
 inline T max(T& a, T& b) {
@@ -24,7 +25,8 @@ int main() {
         values[i] = new_weight;
     }
 
-    cout << max(maxValue(0, values), maxValue(1, values)) <<endl;
+    cout << maxValue(values) <<endl;
+    // cout << max(maxValue(0, values), maxValue(1, values)) <<endl;
 
     return 0;
 }
@@ -42,4 +44,22 @@ unsigned int maxValue(cousint index, array<unsigned int, VALUES_SIZE> values) {
         return -1;
     }
     return -1;
+}
+
+unsigned int maxValue(array<unsigned int, VALUES_SIZE> values) {
+    array<unsigned int, values.size()> max_values = {};
+    for(int i = values.size() - 1; i >= 0; --i) {
+        unsigned int first_neighbor = i + 2;
+        unsigned int second_neighbor = i + 3;
+        printf("i: %d, first_neighbor: %d, second_neighbor: %d\n", i, first_neighbor, second_neighbor);
+        if (first_neighbor < values.size() && second_neighbor < values.size()) {
+            max_values[i] = values[i] + max(max_values[first_neighbor], max_values[second_neighbor]);
+        } else if (first_neighbor < values.size() && second_neighbor >= values.size()) {
+            max_values[i] =  values[i] + max_values[first_neighbor];
+        } else if (first_neighbor >= values.size()) {
+            max_values[i] = values[i];
+        } else {/*donot*/}
+    }
+
+    return max(max_values[0], max_values[1]);
 }
