@@ -25,30 +25,26 @@
 #include <stdint.h>
 #include <fstream>
 #include <random>
+#include "mazecpp.hpp"
 
 namespace maze {
 
     ///////////////// User selectable parameters ///////////////////////////////
 
-    const int ImageSize = 512;
-    const int NumCells  = 4;
-    const int whiteColor = 255;
+    int NumCells = 8;
 
     ////////////////////////////////////////////////////////////////////////////
 
     const char* Version = "1.0.0 (27/05/2014)";
 
-    const int CellSize = ImageSize / NumCells;
-
-    unsigned char* g_Maze = new unsigned char[ NumCells* NumCells ];
+    unsigned char* g_Maze;
 
     // current traversing position
-    int g_PtX;
-    int g_PtY;
+    int g_PtX = 0;
+    int g_PtY = 0;
 
     // return the current index in g_Maze
-    int CellIdx()
-    {
+    int CellIdx() {
         return g_PtX + NumCells * g_PtY;
     }
 
@@ -59,26 +55,15 @@ namespace maze {
     std::uniform_int_distribution<> dis( 0, NumCells - 1 );
     std::uniform_int_distribution<> dis4( 0, 3 );
 
-    int RandomInt()
-    {
+    int RandomInt() {
         return static_cast<int>( dis( gen ) );
     }
 
-    int RandomInt4()
-    {
+    int RandomInt4() {
         return static_cast<int>( dis4( gen ) );
     }
 
     ////////////////////////////////////////////////////////////////////////////
-
-    enum eDirection
-    {
-        eDirection_Invalid = 0,
-        eDirection_Up      = 0b0001,
-        eDirection_Right   = 0b0010,
-        eDirection_Down    = 0b0100,
-        eDirection_Left    = 0b1000
-    };
 
     //                   0  1  2  3  4  5  6  7  8
     //                      U  R     D           L
@@ -99,24 +84,23 @@ namespace maze {
 
     ////////////////////////////////////////////////////////////////////////////
 
-    bool IsDirValid( eDirection Dir )
-    {
+    bool IsDirValid( eDirection Dir ) {
+        
         int NewX = g_PtX + Heading_X[ Dir ];
         int NewY = g_PtY + Heading_Y[ Dir ];
 
         if ( !Dir || NewX < 0 || NewY < 0 || NewX >= NumCells || NewY >= NumCells ) return false;
-
-        return !g_Maze[ NewX + NumCells * NewY ];
+        
+        unsigned char v = g_Maze[ NewX + NumCells * NewY ];
+        return !v;
     }
 
-    eDirection GetDirection()
-    {
+    eDirection GetDirection() {
+        
         eDirection Dir = eDirection( 1 << RandomInt4() );
 
-        while ( true )
-        {
-            for ( int x = 0; x < 4; x++ )
-            {
+        while ( true ) {
+            for ( int x = 0; x < 4; x++ ) {
                 if ( IsDirValid( Dir ) ) { return eDirection( Dir ); }
 
                 Dir = eDirection( Dir << 1 );
@@ -136,12 +120,11 @@ namespace maze {
         }
     }
 
-    void GenerateMaze()
-    {
+    void GenerateMaze() {
+        
         int Cells = 0;
 
-        for ( eDirection Dir = GetDirection(); Dir != eDirection_Invalid; Dir = GetDirection() )
-        {
+        for ( eDirection Dir = GetDirection(); Dir != eDirection_Invalid; Dir = GetDirection() ) {
             // a progress indicator, kind of
             if ( ++Cells % 1000 == 0 ) std::cout << ".";
 
@@ -166,37 +149,49 @@ namespace maze {
     // #pragma pack(pop)
 
     void compute_maze(unsigned short *maze) {
-        for ( int y = 0; y < NumCells; y++ )
-        {
-            for ( int x = 0; x < NumCells; x++ )
-            {
-                char v = g_Maze[ y * NumCells + x ];
-                int nx = x * CellSize;
-                int ny = y * CellSize;
+        
+        for ( int y = 0; y < NumCells; y++ ) {
 
+            for ( int x = 0; x < NumCells; x++ ) {
+
+                char v = g_Maze[ y * NumCells + x ];
+                
                 unsigned short *pointer = &maze[y * NumCells + x];
 
-                if ( ( v & eDirection_Up    ) ) {
+                if (v & eDirection_Up) {
     				*pointer |= eDirection_Up;
     			}
-                if ( ( v & eDirection_Right ) ) {
+                if (v & eDirection_Right) {
     				*pointer |= eDirection_Right;
     			}
-                if ( ( v & eDirection_Down  ) ) {
+                if (v & eDirection_Down) {
                     *pointer |= eDirection_Down;
     			}
-                if ( ( v & eDirection_Left  ) ) {
+                if (v & eDirection_Left) {
     				*pointer |= eDirection_Left;
     			}
             }
         }
     }
+    
+    void cleanup() {
+        delete [] g_Maze;
+        g_PtX = 0;
+        g_PtY = 0;
+    }
 
-    void setup() {
-        gen.seed( time( NULL ) );
+    void setup(int numcells, unsigned int seed) {
+        
+        cleanup();
+        
+        dis = std::uniform_int_distribution<>( 0, NumCells - 1 );
+        
+        NumCells = numcells;
 
+        g_Maze = new unsigned char[ NumCells* NumCells ];
+        gen.seed(seed);
         // clear maze
-        std::fill( g_Maze, g_Maze + NumCells * NumCells, 0 );
+        memset(g_Maze, 0, sizeof(unsigned char) * NumCells * NumCells);
 
         // setup initial point
         g_PtX = RandomInt();
@@ -205,4 +200,5 @@ namespace maze {
         // traverse
         GenerateMaze();
     }
+    
 }
