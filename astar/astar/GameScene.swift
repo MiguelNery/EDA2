@@ -70,13 +70,19 @@ class GameScene: SKScene, PathfinderDataSource {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let position = touches.first!.location(in: self)
-        if let tile = nodes(at: position).first as? MazeTile {
+        var tile: MazeTile?
+        for node in nodes(at: position) {
+            if node is MazeTile {
+                tile = node as? MazeTile
+            }
+        }
+        if let tile = tile {
             if let _ = srcTile {
                 if let _ = destTile {
                     srcTile = tile
-                    srcTile?.highlight()
                     destTile = nil
                     clearPath()
+                    srcTile?.highlight()
                 } else {
                     destTile = tile
                     pathfind()

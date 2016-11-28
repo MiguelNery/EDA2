@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4C030CF51DEB5048008E829E /* Pathfinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C030CF41DEB5048008E829E /* Pathfinder.swift */; };
-		4C030CF71DEB5456008E829E /* MazeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C030CF61DEB5456008E829E /* MazeDelegate.swift */; };
 		4C99C00E1DE31479001DA8BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99C00D1DE31479001DA8BE /* AppDelegate.swift */; };
 		4C99C0101DE31479001DA8BE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C99C00F1DE31479001DA8BE /* GameScene.sks */; };
 		4C99C0121DE31479001DA8BE /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C99C0111DE31479001DA8BE /* Actions.sks */; };
@@ -25,7 +24,6 @@
 
 /* Begin PBXFileReference section */
 		4C030CF41DEB5048008E829E /* Pathfinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pathfinder.swift; sourceTree = "<group>"; };
-		4C030CF61DEB5456008E829E /* MazeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeDelegate.swift; sourceTree = "<group>"; };
 		4C99C00A1DE31479001DA8BE /* astar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = astar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C99C00D1DE31479001DA8BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C99C00F1DE31479001DA8BE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -92,7 +90,6 @@
 				4CE86AB41DE3600700E99A41 /* MazeTile.swift */,
 				4CE86AB61DE3641900E99A41 /* Layer.swift */,
 				4C030CF41DEB5048008E829E /* Pathfinder.swift */,
-				4C030CF61DEB5456008E829E /* MazeDelegate.swift */,
 			);
 			path = astar;
 			sourceTree = "<group>";
@@ -173,7 +170,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C030CF71DEB5456008E829E /* MazeDelegate.swift in Sources */,
 				4C030CF51DEB5048008E829E /* Pathfinder.swift in Sources */,
 				4CE86AB51DE3600700E99A41 /* MazeTile.swift in Sources */,
 				4C99C02A1DE315C4001DA8BE /* Maze.mm in Sources */,
