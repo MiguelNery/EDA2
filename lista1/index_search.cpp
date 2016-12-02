@@ -9,6 +9,10 @@ struct node {
     node<T> *next = NULL;
 
     node(T value, node<T> *next) : value(value), next(next) { };
+
+    ~node() {
+        delete next;
+    }
 };
 
 template <typename T>
@@ -82,6 +86,10 @@ struct list {
         }
         return n;
     }
+
+    ~list() {
+        delete root;
+    }
 };
 
 void fill(list<int>& p, list<node<int> *>& q, int total_size, int p_index_interval) {
@@ -141,7 +149,6 @@ int main() {
 
     auto found = find(n, numbers, primary_indexes);
     printf("found %p: %d\n", found, found->value);
-
 
     return 0;
 }
