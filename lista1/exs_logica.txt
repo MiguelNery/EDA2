@@ -1,0 +1,26 @@
+1. Sabe-se que o Antônio não é o pianista.
+Mas o pianista ensaia sozinho na Terça.
+O João ensaia com o Violoncelista às Quintas
+
+Com essas afirmações, chegamos à conclusão de que Francisco é o pianista.
+Na música erudita, é muito comum o violinista ensaiar junto a um violoncelista,
+e um harpista ensaiar sozinho. Com essa colocação, podemos dizer que João é o
+violinista, e Antônio é o harpista.
+
+2. O prisioneiro deve fazer a seguinte pergunta: "Qual porta o outro guarda
+diria que é a certa?". Sendo assim:
+    Caso "guarda mentiroso":
+        o guarda verdadeiro diria que a porta certa é A, logo, o guarda
+        mentiroso diz B
+
+    Caso "guarda verdadeiro":
+        o guarda mentiroso diria que a porta certa é B quando na verdade é A,
+        logo, o guarda verdadeiro diz B
+
+Basta o prisioneiro fazer essa pergunta e sair pela porta não indicada pelo guarda.
+
+3. "... Então, cada um pagou R$9,00, totalizando R$27,00.
+ O mensageiro tem R$2, totalizando R$29."
+
+ O dinheiro que o mensageiro tem não pode ser somado aos 27, mas deve, porém, ser
+ subtraído. Dos 5 reais de troco, ele tem 2, logo, sobram 3. 3 + 2 = 5, 5 + 25 = 30.
